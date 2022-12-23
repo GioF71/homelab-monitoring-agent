@@ -63,7 +63,7 @@ def iteration(cn, hostname, iteration_count):
 if __name__ == "__main__":
     hostname = configuration.config("HOSTNAME", get_current_host_name())
     use_loop = configuration.config("LOOP", True)
-    delay = int(configuration.config("DELAY_SEC", "5"))
+    delay = int(configuration.config("DELAY_SEC", "60"))
     delay_on_fail = int(configuration.config("DELAY_ON_FAIL_SEC", "1"))
     cn = None
     iteration_count = 0
