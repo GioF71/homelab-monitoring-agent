@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "homelab-monitoring"
+version = "0.1.0"
+description = ""
+authors = ["GioF71 <giovanni.fulco@gmail.com>"]
+readme = "README.md"
+packages = [{include = "homelab_monitoring"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+mysql-connector = "^2.2.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
