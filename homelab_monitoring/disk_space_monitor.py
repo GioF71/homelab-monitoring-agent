@@ -53,6 +53,7 @@ class DiskSpaceMonitor(MonitorModule):
 
     def _insert_disk_space(
             self,
+            cn,
             cursor,
             hostname, 
             mount_point, 
