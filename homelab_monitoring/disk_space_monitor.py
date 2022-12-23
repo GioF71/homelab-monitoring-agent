@@ -6,9 +6,6 @@ import shutil
 class DiskSpaceMonitor(MonitorModule):
 
     def execute(self, cn, hostname : str, iteration_count : int) -> None:
-        self._process_requested_mount_point_list(cn, hostname, iteration_count)
-
-    def _process_requested_mount_point_list(self, cn, hostname : str, iteration_count : int) -> None:
         stored_mount_point_list = self._load_mount_point_list(cn, hostname)
         stored_mount_point_dict = {}
         for stored_mount_point in stored_mount_point_list:
