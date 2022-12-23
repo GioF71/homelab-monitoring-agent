@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "homelab-monitoring"
+name = "homelab-monitoring-agent"
 version = "0.1.0"
 description = ""
 authors = ["GioF71 <giovanni.fulco@gmail.com>"]
 readme = "README.md"
-packages = [{include = "homelab_monitoring"}]
+packages = [{include = "homelab_monitoring_agent"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
