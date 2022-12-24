@@ -1,0 +1,7 @@
+DB_HOST=db_host.lan
+DB_PORT=3306
+DB_USERNAME=monitor
+DB_PASSWORD=monitor
+HOSTNAME=hostname
+HOST_FRIENDLY_NAME=My_Host_Name
+MOUNT_POINTS=/mnt/local/qvo-ssd1,/mnt/local/qvo-ssd2,/mnt/local/firecuda2tb,/mnt/local/wd2tb01,/mnt/local/crucial750,/mnt/local/spc1tb,/mnt/local/s8tb03,/
