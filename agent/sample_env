@@ -1,4 +1,5 @@
 DB_HOST=db_host.lan
+DB_PORT=3306
 DB_USERNAME=monitor
 DB_PASSWORD=monitor
 HOSTNAME=hostname

@@ -6,4 +6,4 @@ grep -v '^#' .env
 # Export env vars
 export $(grep -v '^#' .env | xargs)
 
-python3 monitor.py
+python3 homelab_monitoring_agent/monitor.py

@@ -3,6 +3,7 @@ FROM python:3.9
 RUN pip install mysql-connector
 
 ENV DB_HOST ""
+ENV DB_PORT ""
 ENV DB_USERNAME ""
 ENV DB_PASSWORD ""
 ENV HOSTNAME ""
