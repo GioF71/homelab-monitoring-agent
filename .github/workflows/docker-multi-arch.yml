@@ -39,6 +39,9 @@ jobs:
 
           base_image=${base_image_from_matrix[${{ matrix.base }}]}
 
+          declare -A special_tags
+          special_tags[python]="${image_name}:stable,${image_name}:latest"
+
           tags=""
           if [ "${ref_type}" = "branch" ]; then
             echo "branch mode";
@@ -64,6 +67,13 @@ jobs:
               echo "Building now: ["$distro_id"]";
               tags="${tags},$image_name:${distro_id}";
               tags="$tags,$image_name:${distro_id}-${tag_name}"              
+              select_special_tags=${special_tags["${distro_id}"]};
+              if [[ -n "${select_special_tags}" ]]; then
+                echo "Found special tags for ["${distro_id}"]=["${select_special_tags}"]";
+                tags="$tags,${select_special_tags}";
+              else
+                echo "No special tag found for ["${distro_id}"]";
+              fi
             elif [ "${tag_type}" = "main" ]; then
               echo "main tag";
               tags="${image_name}:main-${tag_name}-${distro_id}";
