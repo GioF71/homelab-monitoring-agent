@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb
--- Generation Time: Dec 23, 2022 at 07:22 PM
+-- Generation Time: Dec 24, 2022 at 10:52 AM
 -- Server version: 10.6.10-MariaDB-log
 -- PHP Version: 8.0.26
 
@@ -36,7 +36,18 @@ CREATE TABLE `disk_space` (
   `free_bytes` bigint(20) DEFAULT NULL,
   `creation_timestamp` timestamp NULL DEFAULT current_timestamp(),
   `update_timestamp` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=Aria DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `host`
+--
+
+CREATE TABLE `host` (
+  `id` varchar(64) NOT NULL,
+  `friendly_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Indexes for dumped tables
@@ -46,7 +57,15 @@ CREATE TABLE `disk_space` (
 -- Indexes for table `disk_space`
 --
 ALTER TABLE `disk_space`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `idx_host_mount_point` (`host_id`,`mount_point`);
+
+--
+-- Indexes for table `host`
+--
+ALTER TABLE `host`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `friendly_name` (`friendly_name`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -56,7 +75,17 @@ ALTER TABLE `disk_space`
 -- AUTO_INCREMENT for table `disk_space`
 --
 ALTER TABLE `disk_space`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `disk_space`
+--
+ALTER TABLE `disk_space`
+  ADD CONSTRAINT `disk_space_ibfk_1` FOREIGN KEY (`host_id`) REFERENCES `host` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
