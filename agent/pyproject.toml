@@ -9,6 +9,7 @@ packages = [{include = "homelab_monitoring_agent"}]
 [tool.poetry.dependencies]
 python = "^3.9"
 mysql-connector = "^2.2.9"
+python-dotenv = "^0.21.0"
 
 
 [build-system]
