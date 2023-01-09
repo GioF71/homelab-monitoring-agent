@@ -14,6 +14,9 @@ import db
 import available_modules
 import monitor_module
 
+import dotenv
+import config_keys
+
 def get_current_host_name():
     return socket.gethostname()
 
@@ -60,7 +63,24 @@ def iteration(cn, hostname, iteration_count):
         # Should not happen!
         print("Host [{}] not found".format(hostname))
 
+def get_db_credentials() -> dict[str, str]:
+    result : dict[str, str] = {}
+    credentials_file_name : str = configuration.config("DB_CREDENTIALS_FILE", "/user/config/db-credentials.txt")
+    if credentials_file_name:
+        # load file
+        print("Loading db credentials file [" + credentials_file_name + "]")
+        result = dotenv.dotenv_values(dotenv_path = credentials_file_name)
+    else:
+        print("Loading db credentials from environment")
+        result[config_keys.KEY_DB_HOST] = configuration.config(config_keys.KEY_DB_HOST)
+        result[config_keys.KEY_DB_PORT] = configuration.config(config_keys.KEY_DB_PORT, 3306)
+        result[config_keys.KEY_DB_USERNAME] = configuration.config(config_keys.KEY_DB_USERNAME)
+        result[config_keys.KEY_DB_PASSWORD] = configuration.config(config_keys.KEY_DB_PASSWORD)
+
+    return result
+
 if __name__ == "__main__":
+    db_credentials : dict[str, str] = get_db_credentials()
     hostname = configuration.config("HOSTNAME", get_current_host_name())
     use_loop = configuration.config("LOOP", True)
     delay = int(configuration.config("DELAY_SEC", "60"))
@@ -72,7 +92,7 @@ if __name__ == "__main__":
         iteration_start = time.time()
         try:
             if cn == None:
-                cn = db.connect()
+                cn = db.connect(db_credentials)
             iteration(cn, hostname, iteration_count)
             success = True
         except mysql.connector.errors.OperationalError as mySqlError:

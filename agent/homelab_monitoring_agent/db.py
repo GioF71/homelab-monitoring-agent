@@ -1,10 +1,12 @@
 import mysql.connector
 from configuration import config
+import config_keys
 
-def connect():
+def connect(parameters : dict[str, str]):
+    db_port = parameters[config_keys.KEY_DB_PORT] if config_keys.KEY_DB_PORT in parameters else 3306
     return mysql.connector.connect(
-        host = config("DB_HOST"),
-        port = config("DB_PORT", 3306),
-        user = config("DB_USERNAME"),
-        passwd = config("DB_PASSWORD"))
+        host = parameters[config_keys.KEY_DB_HOST],
+        port = db_port,
+        user = parameters[config_keys.KEY_DB_USERNAME],
+        passwd = parameters[config_keys.KEY_DB_PASSWORD])
 
